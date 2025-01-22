@@ -90,14 +90,26 @@ export const uploadImage = async (file: PhotoFile, childId: string): Promise<str
 };
 
 
-export const deleteImage = async (filePath: string): Promise<void> => {
+export const deleteImage = async (fileUrl: string): Promise<void> => {
   try {
-    console.log(`Deleting file from: ${filePath}`);
+    console.log(`Deleting file from: ${fileUrl}`);
 
+    // חילוץ הנתיב מתוך ה-URL
+    const bucketBaseUrl = 'https://zwlbbpgtlzaeybzxrjbk.supabase.co/storage/v1/object/public/child-photos/';
+    const filePath = fileUrl.replace(bucketBaseUrl, '');
+
+    console.log(`Extracted file path: ${filePath}`);
+
+  //   const { error } = await supabase.storage
+  // .from('child-photos')
+  // .remove(['236854295/1737500666447.jpeg']);
+  
     // קריאה לפונקציית המחיקה ב-Supabase
-    const { error } = await supabase.storage
-      .from('child-photos') // שם הבאקט
-      .remove([filePath]); // מחיקת הקובץ לפי הנתיב
+    const { data, error } = await supabase.storage
+    .from('child-photos')
+    .remove([filePath]);
+  
+  console.log('Remove response:', data, error);
 
     if (error) {
       console.error('Error deleting image:', error.message); // טיפול בשגיאה
@@ -110,3 +122,4 @@ export const deleteImage = async (filePath: string): Promise<void> => {
     throw error; // השלכת השגיאה כדי לאפשר טיפול חיצוני
   }
 };
+

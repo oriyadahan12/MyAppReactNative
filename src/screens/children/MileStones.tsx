@@ -1,20 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { doc, getDoc, updateDoc, Timestamp, deleteField } from "firebase/firestore";
-import { db, auth } from "../../util/firebaseConfig";
+import {Text, View, Button, TextInput, Alert, StyleSheet, ScrollView, TouchableOpacity, Image,} from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
-import { signOut } from "firebase/auth";
-import {
-  Text,
-  View,
-  Button,
-  TextInput,
-  Alert,
-  StyleSheet,
-  ScrollView,  TouchableOpacity,
-  Image,
-} from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { doc, getDoc, updateDoc, Timestamp, deleteField } from "firebase/firestore";
+import { signOut } from "firebase/auth";
+import { db, auth } from "../../util/firebaseConfig";
 import { uploadImage, PhotoFile,  pickImage, deleteImage} from '../../components/ImageUpload';
 
 interface ChildData {
@@ -36,7 +27,6 @@ const MileStones = () => {
   const route = useRoute();
   const navigation = useNavigation();
   const { childId } = route.params as { childId: string };
-
   const [childData, setChildData] = useState<ChildData | null>(null);
   const [editingStage, setEditingStage] = useState<string | null>(null);
   const [editData, setEditData] = useState<StageData | null>(null);
@@ -46,6 +36,7 @@ const MileStones = () => {
   const [newStageName, setNewStageName] = useState<string>("");
   const [imageError, setImageError] = useState<boolean>(false);
 
+  // שליפת נתוני הילד לפי הid
   useEffect(() => {
     const fetchChildData = async () => {
       try {
@@ -68,12 +59,14 @@ const MileStones = () => {
     fetchChildData();
   }, [childId]);
 
+  // המרת האובייקט לסוג תאריך
   const formatDate = (timestamp: Timestamp | null) => {
     if (!timestamp) return "";
     const date = timestamp.toDate();
     return new Intl.DateTimeFormat("he-IL").format(date);
   };
 
+//שמירת הנתונים המעודכנים בשלב לאחר העריכה
   const handleSaveStage = async (stageName: string) => {
     if (!editData) return;
   
@@ -104,7 +97,7 @@ const MileStones = () => {
     }
   };
   
-
+// 
   const handleEditStage = (stageName: string, stageData: StageData) => {
     setEditingStage(stageName);
     setEditData(stageData);
@@ -171,11 +164,12 @@ const MileStones = () => {
     }
   };
   
-  
+  //סגירה של הלוח לבחירת תאריך לא שינוי
   const handleCancelDate = () => {
-    setShowDatePicker(false); // סגור את תיבת הבחירה בלי שינוי
+    setShowDatePicker(false); 
   };
   
+  //מחיקת התאריך שנבחר
   const handleResetDate = () => {
     setEditData((prev) => ({
       ...(prev || {}),
@@ -183,6 +177,7 @@ const MileStones = () => {
     }));
   };
   
+  //הוספת שלב חדש שלא קיים
   const handleAddNewStage = async () => {
     if (!newStageName.trim()) {
       Alert.alert("שגיאה", "שם שלב לא יכול להיות ריק.");
@@ -223,6 +218,7 @@ const MileStones = () => {
   if (loading) return <Text>טוען נתונים...</Text>;
   if (error) return <Text>שגיאה: {error}</Text>;
 
+  //התנתקות מחשבון המשתמש
   const handleLogout = async () => {
     Alert.alert('התנתקות', 'האם אתה בטוח שברצונך להתנתק?', [
       {

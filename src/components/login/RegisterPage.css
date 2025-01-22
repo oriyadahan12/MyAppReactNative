@@ -1,0 +1,75 @@
+.input-group {
+    position: relative;
+    width: 90%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* רווח בין הקבוצות */
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    gap: 5px; /* רווח בין השדות בתוך השורה */
+    justify-content: space-between; /* יישור עם רווחים */
+}
+
+input, select {
+    flex: 1; /* כל שדה יתפוס מקום שווה */
+    min-width: 5px; /* מאפשר גמישות ברוחב */
+}
+
+select {
+    width: 90%;
+    padding: 12px;
+    margin: 0;
+    border: 2px solid #e1e8f0; /* מסגרת בצבע תכלת בהיר */
+    border-radius: 10px;
+    text-align: right; /* יישור טקסט לימין */
+    direction: rtl; /* תמיכה בעברית */
+    color: #2d5c8f;
+  }
+  
+  select:focus {
+    outline: none;
+    border-color: #7eb1ff; /* צבע מסגרת בפוקוס */
+  }
+
+.gender-select select {
+    width: 100%; /* התאמה לשדה הסלקט */
+}
+
+.gender-select {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+  .name-input {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .joining-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    gap: 12px;
+  }
+  .joining-buttons button {
+    background-color: #e8f0fe; /* רקע בהיר לכפתורי המדיה החברתית */
+    color: #2d5c8f;
+    border: 2px solid #abb7c5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 12px 20px;
+  }
+  
+  .joining-buttons button:hover {
+    background-color: #e8f0fe;
+    border-color: #7eb1ff;
+  }

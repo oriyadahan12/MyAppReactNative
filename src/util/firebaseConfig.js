@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
+import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
+import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 
 // הגדר את המפתח שלך מפיירבייס
 const firebaseConfig = {
@@ -16,7 +17,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // גישה לפונקציות Auth ו-Firestore
-const auth = getAuth(app);
 const db = getFirestore(app);
 
-export { auth, db };
+const auth = initializeAuth(app, {
+    persistence: getReactNativePersistence(ReactNativeAsyncStorage),
+  });
+
+export { db, app, auth};

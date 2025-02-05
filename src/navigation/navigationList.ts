@@ -7,6 +7,7 @@ export type RootStackParamList = {
   ChildCard: {childId: string};
   MileStones: {childId: string};
   UpdateChild: {childId: string};
+  DoctorVisits: {childId: string};
 
   // הוסיפי מסכים נוספים כאן
 };

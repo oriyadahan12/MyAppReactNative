@@ -9,6 +9,7 @@ import AddChild from '../screens/family/AddChild';
 import ChildCard from '../screens/children/ChildCard';
 
 import MileStones from '../screens/children/MileStones';
+import DoctorVisits from '../screens/children/DoctorVisits';
 import UpdateChild from '../screens/children/UpdateChild';
 
 import ScreenWrapper from '../components/ScreenWrapper'; // הוספת ה-Wrapper
@@ -47,6 +48,13 @@ const AppNavigator = () => {
             </ScreenWrapper>
           )}
         </Stack.Screen>
+        <Stack.Screen name="UpdateChild">
+          {() => (
+            <ScreenWrapper>
+              <UpdateChild />
+            </ScreenWrapper>
+          )}
+        </Stack.Screen>
         <Stack.Screen name="AddChild">
           {() => (
             <ScreenWrapper>
@@ -65,6 +73,13 @@ const AppNavigator = () => {
           {() => (
             <ScreenWrapper>
               <MileStones />
+            </ScreenWrapper>
+          )}
+        </Stack.Screen>
+        <Stack.Screen name="DoctorVisits">
+          {() => (
+            <ScreenWrapper>
+              <DoctorVisits />
             </ScreenWrapper>
           )}
         </Stack.Screen>

@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
+import { View, Text, TextInput,Image, Button, Alert, StyleSheet, TouchableOpacity, ImageBackground} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-
-
-
 import {signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, AuthProvider,  signInWithCredential}
    from 'firebase/auth';
-
 import {doc, getDoc, setDoc,
   collection,
   getDocs,
@@ -19,6 +15,8 @@ import {doc, getDoc, setDoc,
   QuerySnapshot
 } from 'firebase/firestore';
 import { auth, db } from '../../util/firebaseConfig';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
 
 const Login = () => {
   const [username, setUsername] = useState<string>('');
@@ -56,116 +54,6 @@ const Login = () => {
   };
 
 
-  // const handleSocialLogin = async (provider: AuthProvider) => {
-  //   try {
-  //     let user: any; // Define user variable at the top level
-  
-  //     // אם הספק הוא Google
-  //     if (provider instanceof GoogleAuthProvider) {
-  //       // קבלת פרטי המשתמש
-  //       const userInfo = await GoogleSignin.signIn();
-  //       // קבלת הטוקנים בנפרד
-  //       const tokens = await GoogleSignin.getTokens();
-        
-  //       const googleCredential = GoogleAuthProvider.credential(
-  //         tokens.idToken,
-  //         tokens.accessToken
-  //       );
-        
-  //       const result = await signInWithCredential(auth, googleCredential);
-  //       user = result.user;
-  //     }
-      
-  //     // אם הספק הוא Facebook
-  //     else if (provider instanceof FacebookAuthProvider) {
-  //       const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
-  //       if (result.isCancelled) {
-  //         throw new Error('ההתחברות בוטלה');
-  //       }
-        
-  //       const data = await AccessToken.getCurrentAccessToken();
-  //       if (!data) {
-  //         throw new Error('לא התקבל token');
-  //       }
-        
-  //       const facebookCredential = FacebookAuthProvider.credential(data.accessToken);
-  //       const userCredential = await signInWithCredential(auth, facebookCredential);
-  //       user = userCredential.user;
-  //     }
-  
-  //     // וידוא שיש לנו משתמש
-  //     if (!user) {
-  //       throw new Error('לא התקבלו פרטי משתמש');
-  //     }
-  
-  //     // בדיקה אם המשתמש קיים במערכת
-  //     const usersSnapshot = await getDocs(collection(db, 'users'));
-  //     const existingUserDoc = usersSnapshot.docs.find(
-  //       (doc) => doc.data().email === user.email
-  //     );
-  
-  //     if (existingUserDoc) {
-  //       const existingUser = existingUserDoc.data();
-  //       const familyUsername = existingUser.familyUsername;
-  //       const personalUsername = existingUserDoc.id;
-  
-  //       Alert.alert('המייל הזה כבר רשום במערכת, נכנסים לחשבונך...');
-  //       navigation.navigate('Family', { familyUsername, personalUsername });
-  //       return;
-  //     }
-  
-  //     const action = prompt('בחר אופציה:\n1 - להצטרף למשפחה קיימת\n2 - ליצור משפחה חדשה');
-  
-  //     if (action === '1') {
-  //       const familyUsername = prompt('הכנס שם משתמש של המשפחה:');
-  //       const password = prompt('הכנס סיסמה של המשפחה:');
-  
-  //       if (!familyUsername || !password) {
-  //         Alert.alert('יש להזין שם משתמש וסיסמה תקינים.');
-  //         return;
-  //       }
-  
-  //       const familyDoc = await getDoc(doc(db, 'families', familyUsername));
-  //       if (!familyDoc.exists()) {
-  //         Alert.alert('משפחה לא נמצאה.');
-  //         return;
-  //       }
-  
-  //       const familyData = familyDoc.data();
-  //       if (familyData.password !== password) {
-  //         Alert.alert('סיסמה שגויה.');
-  //         return;
-  //       }
-  
-  //       await updateDoc(doc(db, 'families', familyUsername), {
-  //         [`members.${user.uid}`]: user.displayName?.split(' ')[0] || '',
-  //       });
-  
-  //       await setDoc(doc(db, 'users', user.uid), {
-  //         firstName: user.displayName?.split(' ')[0] || '',
-  //         lastName: user.displayName?.split(' ')[1] || '',
-  //         email: user.email,
-  //         fromEmail: true,
-  //         familyUsername,
-  //         familyName: familyData.familyName,
-  //         gender: '',
-  //         birthDate: null,
-  //         personalUsername: user.uid,
-  //         joinDate: new Date().toISOString(),
-  //       });
-  
-  //       Alert.alert('הצטרפת בהצלחה למשפחה הקיימת!');
-  //       navigation.navigate('Family', { familyUsername, personalUsername: user.uid });
-  //     } else if (action === '2') {
-  //       // Similar steps for creating a new family
-  //     } else {
-  //       Alert.alert('בחירה לא תקינה');
-  //     }
-  //   } catch (error) {
-  //     console.error('שגיאה בכניסה: ', error);
-  //   }
-  // };
-  
   const handleSocialLogin = async () => {
     try {
       const provider = new GoogleAuthProvider(); // יצירת ספק התחברות
@@ -241,64 +129,152 @@ const Login = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>כניסה</Text>
-      <TextInput
-        style={styles.input}
-        value={username}
-        onChangeText={setUsername}
-        placeholder="שם משתמש"
-      />
-      <View style={styles.passwordContainer}>
-        <TextInput
-          style={styles.input}
-          secureTextEntry={!showPassword}
-          value={password}
-          onChangeText={setPassword}
-          placeholder="סיסמה"
-        />
-        <Button title={showPassword ? 'הסתר סיסמה' : 'הצג סיסמה'} onPress={() => setShowPassword(!showPassword)} />
+    <ImageBackground source={require("../../assets/background2.jpg")} style={styles.background}>
+      
+      <View style={styles.container}>
+        <Text style={styles.title}>כניסה</Text>
+
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            value={username}
+            onChangeText={setUsername}
+            placeholder="שם משתמש"
+          />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            secureTextEntry={!showPassword}
+            value={password}
+            onChangeText={setPassword}
+            placeholder="סיסמה"
+          />
+          <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={styles.eyeIcon}>
+            <Icon name={showPassword ? "eye" : "eye-slash"} size={20} color="rgb(102, 23, 102)" />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={handleLogin}>
+            <Text style={styles.buttonText}>התחבר</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Register')}>
+            <Text style={styles.buttonText}>רישום</Text>
+          </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity style={styles.googleButton} onPress={handleSocialLogin}>
+          <Image source={require("../../assets/google-icon.png")} style={styles.googleIcon} />
+          <Text style={styles.googleButtonText}>התחבר עם Google</Text>
+        </TouchableOpacity>
       </View>
-      <View style={styles.buttonContainer}>
-        <Button title="התחבר" onPress={handleLogin} />
-        <Button title="רישום" onPress={() => navigation.navigate('Register')} />
-      </View>
-      <View style={styles.socialButtons}>
-        <Button title="התחבר עם Google" onPress={() => handleSocialLogin()} />
-        <Button title="התחבר עם Facebook" onPress={() => handleSocialLogin()} />
-      </View>
-    </View>
+
+      <Image source={require("../../assets/1.png")} style={styles.familyIcon} />
+          
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    flex: 1,
+  background: { 
+    flex: 1, 
+    resizeMode: "cover", 
+    width: "100%", 
+    height: "100%", 
+},
+  container: { 
+    padding: 20, 
+    backgroundColor: "rgba(253, 251, 253, 0.5)", 
+    flex: 1, 
+    borderRadius: 20, 
+    margin: 10,
     justifyContent: 'center',
   },
   title: {
-    fontSize: 24,
-    textAlign: 'center',
-    marginBottom: 20,
+    fontSize: 30, 
+    fontWeight: "bold", 
+    marginBottom: 16, 
+    textAlign: "center", 
+    color: "#6A0572" 
   },
   input: {
-    height: 40,
-    borderColor: '#ddd',
-    borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 20,
-    paddingLeft: 10,
+    fontSize: 16,
+    textAlign: "right",
+    flex: 1, 
+    marginLeft: 8 
   },
-  passwordContainer: {
-    marginBottom: 20,
+  inputContainer: {
+    borderColor:"rgb(102, 23, 102)",
+    flexDirection: "row", 
+    alignItems: "center", 
+    borderWidth: 1, 
+    borderRadius: 16, 
+    padding: 5, 
+    backgroundColor: "#fff", 
+    marginBottom: 10
+  },
+  eyeIcon: {
+    color:"rgb(102, 23, 102)",
+    position: "absolute",
+    left: 10,
+    top: "65%",
+    transform: [{ translateY: -12 }], // ממרכז את האייקון אנכית
   },
   buttonContainer: {
-    marginBottom: 20,
+    flexDirection: "row", 
+    alignItems: "center",  
+    padding: 10, 
+    borderRadius: 16, 
+    justifyContent: "space-between", 
+    marginBottom: 8 
   },
-  socialButtons: {
+  button:{
+    width:"45%",
+    flexDirection: "row", 
+    alignItems: "center", 
+    backgroundColor: "#6A0572", 
+    padding: 10, 
+    borderRadius: 16, 
+    justifyContent: "center", 
+    marginBottom: 8 
+  },
+  buttonText:{
+    color: "#fff", 
+    fontWeight: "bold", 
+    fontSize: 18, 
+    marginLeft: 8,
+  },
+  googleButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor:'rgb(209, 197, 208)', 
+    borderWidth: 1.5,
+    borderColor:"rgb(102, 23, 102)",
+    borderRadius: 16,
+    paddingVertical: 10,
     marginTop: 20,
   },
+  googleIcon: {
+    width: 24,
+    height: 24,
+    marginRight: 10,
+  },
+  googleButtonText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "rgb(58, 8, 58)",
+  },
+  familyIcon: { 
+    width: 110, 
+    height: 120, 
+    position: "absolute", // מאפשר למקם אותו בלי להשפיע על שאר האלמנטים
+    bottom: 10, 
+    right: 20, // מזיז אותו לצד שמאל
+  }
 });
 
 export default Login;

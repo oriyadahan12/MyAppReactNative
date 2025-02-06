@@ -22,7 +22,7 @@ export const requestPermission = async (): Promise<boolean> => {
 };
 
 // פונקציה לבחירת תמונה מהגלריה
-export const pickImage = async (useCamera = false, cropSize = [1, 1]) => {
+export const pickImage = async (useCamera = false, profile=false) => {
   const hasPermission = await requestPermission();
   if (!hasPermission) return null;
 
@@ -31,14 +31,14 @@ export const pickImage = async (useCamera = false, cropSize = [1, 1]) => {
   if (useCamera) {
     result = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
-      // aspect: cropSize, // שימוש בגודל מותאם אישית
+  ...(profile ? { aspect: [1, 1] } : {}), // אם profile true נוסיף aspect, אחרת לא
       quality: 1,
     });
   } else {
     result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      // aspect: cropSize, // שימוש בגודל מותאם אישית
+  ...(profile ? { aspect: [1, 1] } : {}), // אם profile true נוסיף aspect, אחרת לא
       quality: 1,
     });
   }

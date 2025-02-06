@@ -11,6 +11,8 @@ import ChildCard from '../screens/children/ChildCard';
 import MileStones from '../screens/children/MileStones';
 import DoctorVisits from '../screens/children/DoctorVisits';
 import UpdateChild from '../screens/children/UpdateChild';
+import Vacinations from '../screens/children/Vacinations';
+import DropOfMilk from '../screens/children/DropOfMilk';
 
 import ScreenWrapper from '../components/ScreenWrapper'; // הוספת ה-Wrapper
 
@@ -80,6 +82,20 @@ const AppNavigator = () => {
           {() => (
             <ScreenWrapper>
               <DoctorVisits />
+            </ScreenWrapper>
+          )}
+        </Stack.Screen>
+        <Stack.Screen name="Vacinations">
+          {() => (
+            <ScreenWrapper>
+              <Vacinations />
+            </ScreenWrapper>
+          )}
+        </Stack.Screen>
+        <Stack.Screen name="DropOfMilk">
+          {() => (
+            <ScreenWrapper>
+              <DropOfMilk />
             </ScreenWrapper>
           )}
         </Stack.Screen>

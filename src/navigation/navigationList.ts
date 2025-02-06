@@ -8,6 +8,8 @@ export type RootStackParamList = {
   MileStones: {childId: string};
   UpdateChild: {childId: string};
   DoctorVisits: {childId: string};
+  Vacinations: {childId: string};
+  DropOfMilk: {childId: string};
 
   // הוסיפי מסכים נוספים כאן
 };

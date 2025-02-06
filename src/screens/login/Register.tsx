@@ -136,7 +136,7 @@ const Register = () => {
         },
       );
   
-      Alert.alert('הרשמה הושלמה בהצלחה!');
+      Alert.alert('הצלחה', 'הרישום הושלם בהצלחה!');
       navigation.navigate('Family', { familyUsername, personalUsername });
     } catch (error) {
       console.error('שגיאה בהרשמה: ', error);

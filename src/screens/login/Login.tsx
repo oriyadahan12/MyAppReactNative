@@ -45,6 +45,8 @@ const Login = () => {
       } else {
         const userData = { username, familyUsername };
         await AsyncStorage.setItem('currentUser', JSON.stringify(userData));
+        Alert.alert('הצלחה', 'התחברות בוצעה בהצלחה! אתה מועבר לחשבונך..');
+        
         navigation.navigate('Family', { familyUsername, personalUsername: username });
       }
     } catch (error) {
@@ -158,7 +160,7 @@ const Login = () => {
 
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={handleLogin}>
-            <Text style={styles.buttonText}>התחבר</Text>
+            <Text style={styles.buttonText}>התחברות</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Register')}>

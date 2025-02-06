@@ -13,6 +13,25 @@ import Icon2 from 'react-native-vector-icons/Ionicons';
 import Header from '../../components/header'; // ייבוא הקומפוננטה של הסרגל
 import { Timestamp } from 'firebase/firestore';
 
+export const calculateAge = (birthTimestamp) => {
+  const birthDate = birthTimestamp.toDate();
+  const today = new Date();
+  let years = today.getFullYear() - birthDate.getFullYear();
+  let months = today.getMonth() - birthDate.getMonth();
+  let days = today.getDate() - birthDate.getDate();
+
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  if (days < 0) {
+    months--;
+  }
+
+  return { years, months };
+};
+
 const ChildCard = () => {
   const navigation = useNavigation();
   const route = useRoute();
@@ -49,24 +68,6 @@ useFocusEffect(
     );
   }
 
-  const calculateAge = (birthTimestamp) => {
-    const birthDate = birthTimestamp.toDate();
-    const today = new Date();
-    let years = today.getFullYear() - birthDate.getFullYear();
-    let months = today.getMonth() - birthDate.getMonth();
-    let days = today.getDate() - birthDate.getDate();
-  
-    if (months < 0) {
-      years--;
-      months += 12;
-    }
-  
-    if (days < 0) {
-      months--;
-    }
-  
-    return { years, months };
-  };
   const age = calculateAge(childData.birthDate);
 
 
@@ -81,8 +82,8 @@ useFocusEffect(
   const navigationButtons = [
     { text: 'ציוני דרך', icon: <Icon2 name="footsteps" size={24} color="rgba(44, 13, 44, 0.88)" />, path: 'MileStones' },
     { text: 'ביקורים אצל הרופא', icon: <Icon name="stethoscope" size={24} color="rgba(44, 13, 44, 0.88)" />, path: 'DoctorVisits' },
-    { text: 'טיפת חלב', icon: <Icon name="baby" size={24} color="rgba(44, 13, 44, 0.88)" />, path: '' },
-    { text: 'חיסונים', icon: <Icon name="syringe" size={24} color="rgba(44, 13, 44, 0.88)" />, path: 'Vaccinations' },
+    { text: 'טיפת חלב', icon: <Icon name="baby" size={24} color="rgba(44, 13, 44, 0.88)" />, path: 'DropOfMilk' },
+    { text: 'חיסונים', icon: <Icon name="syringe" size={24} color="rgba(44, 13, 44, 0.88)" />, path: 'Vacinations' },
     { text: 'מעקב גדילה', icon: <Icon name="chart-line" size={24} color= 'rgba(44, 13, 44, 0.88)' />, path: 'GrowthSize' },
     { text: 'עדכון פרטי ילד', icon: <Icon name="edit" size={24} color="rgba(44, 13, 44, 0.88)" />, path: 'UpdateChild' },
   ];

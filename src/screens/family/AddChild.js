@@ -22,10 +22,25 @@ const AddChild = () => {
   });
 
   const handlePickImage = async () => {
-    const image = await pickImage();
-    if (image) {
-      setChildData({ ...childData, photo: image });
-    }
+    Alert.alert("הוסף תמונה", "בחר את מקור התמונה:", [
+      {
+        text: "📷 מצלמה",
+        onPress: async () => {
+          const image = await pickImage(true, true); // צילום תמונה
+          if (image) {
+            setChildData({ ...childData, photo: image });
+          }},
+      },
+      {
+        text: "🖼️ גלריה",
+        onPress: async () => {
+          const image = await pickImage(false, true); // בחירת תמונה מהגלריה
+          if (image) {
+            setChildData({ ...childData, photo: image });
+          }},
+      },
+      { text: "ביטול", style: "cancel" },
+    ]);
   };
 
   const validateBirthDate = (date) => {
@@ -102,50 +117,13 @@ const AddChild = () => {
         familyUsername: familyUsername,
         idNumber:childData.idNumber,
         "mileStones": [
-  { "name": "עמדתי לבד", "date": null, "comments": "" },
-  { "name": "מחאתי כפיים", "date": null, "comments": "" }
-]
-      //   mileStones: {
-      //     'החיוך הראשון שלי': {
-      //       date: null, //  תאריך ריק
-      //       comments: "", // מחרוזת ריקה בשביל הערות
-      //       document: null, // מסמך או תמונה ריק
-      //     },
-      //     'צחקתי': {
-      //       date: null, //  תאריך ריק
-      //       comments: "", // מחרוזת ריקה בשביל הערות
-      //       document: null, // מסמך או תמונה ריק
-      //     },
-      //     'זחלתי': {
-      //       date: null, //  תאריך ריק
-      //       comments: "", // מחרוזת ריקה בשביל הערות
-      //       document: null, // מסמך או תמונה ריק
-      //     },
-
-      //     'צמחה לי שן ראשונה': {
-      //       date: null, //  תאריך ריק
-      //       comments: "", // מחרוזת ריקה בשביל הערות
-      //       document: null, // מסמך או תמונה ריק
-      //     },
-
-      //     'הצעד הראשון שלי': {
-      //       date: null, //  תאריך ריק
-      //       comments: "", // מחרוזת ריקה בשביל הערות
-      //       document: null, // מסמך או תמונה ריק
-      //     },
-      //     'המילה הראשונה שלי': {
-      //       date: null, //  תאריך ריק
-      //       comments: "", // מחרוזת ריקה בשביל הערות
-      //       document: null, // מסמך או תמונה ריק
-      //     },
-      
-      //     'נגמלתי מטיטולים': {
-      //       date: null, //  תאריך ריק
-      //       comments: "", // מחרוזת ריקה בשביל הערות
-      //       document: null, // מסמך או תמונה ריק
-      //     },
-      //   },
-      });
+          { "name": "החיוך הראשון שלי", "date": null, "comments": "" },
+          { "name": "צחקתי", "date": null, "comments": "" },
+          { "name": "זחלתי", "date": null, "comments": "" },
+          { "name": "צמחה לי שן ראשונה", "date": null, "comments": "" },
+          { "name": "הצעד הראשון שלי", "date": null, "comments": "" },
+          { "name": "נגמלתי מטיטולים", "date": null, "comments": "" },
+          ]});
 
       const childId = childRef.id; // קבלת ה-ID החדש שנוצר
 

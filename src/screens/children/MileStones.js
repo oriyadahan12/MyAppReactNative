@@ -561,7 +561,7 @@ return (
             onPress={() => setEditingStage("newStage")} 
             style={styles.outButton}
           >
-            <Text style={styles.buttonText}>הוסף שלב חדש</Text>
+            <Text style={styles.buttonText}>הוסף ציון דרך חדש</Text>
           </TouchableOpacity>
   
           {/* הצגת השדות לעריכה במרכז אם נמצאים במצב עריכה */}

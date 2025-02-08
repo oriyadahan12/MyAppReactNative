@@ -293,7 +293,7 @@ const MileStones = () => {
                       }
 
                       // העלאה ל-Firebase
-                      const uploadedUrl = await uploadImage(photo, childId);
+                      const uploadedUrl = await uploadImage(photo, childId,);
                       if (uploadedUrl) {
                         setEditData((prev) => ({
                           ...(prev || { date: null, comments: "" }),

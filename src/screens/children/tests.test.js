@@ -1,5 +1,5 @@
 import { Timestamp } from 'firebase/firestore';
-import { calculateAge } from "./ChildCard"; // וודא שנתיב זה נכון
+import { calculateAge } from "./ChildCard";
 
 describe('calculateAge', () => {
   test("calculateAge should return the correct age", () => {

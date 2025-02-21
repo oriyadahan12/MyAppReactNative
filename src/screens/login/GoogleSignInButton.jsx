@@ -1,37 +1,38 @@
-import React, { useEffect, useState} from "react";
-import { Text, TouchableOpacity, Image} from "react-native";
+import React, { useEffect, useState } from "react";
+import { Text, TouchableOpacity, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { useDispatch } from "react-redux";
-import { app } from '../../util/firebaseConfig';
+import { firebase } from '../../util/firebaseConfig';
 import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
 import Toast from 'react-native-toast-message';
-import { AntDesign } from "@expo/vector-icons"; 
 
 const GoogleSignInButton = () => {
   const navigation = useNavigation();
-  const dispatch = useDispatch();
   const [user, setUser] = useState(null);
 
   WebBrowser.maybeCompleteAuthSession();
-  
-  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    clientId: "710882524172-khjkd7jj81k62a0jl18mb4jk0njfpfo1.apps.googleusercontent.com",
-    redirectUri: "https://auth.expo.io/@tair2000/my_new_app",
-  });
 
-  useEffect(() => {
-    if (response?.type === "success") {
-      const { id_token } = response.params;
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    // clientId: "710882524172-khjkd7jj81k62a0jl18mb4jk0njfpfo1.apps.googleusercontent.com",
+    // redirectUri: "https://auth.expo.io/@tair2000/my_new_app",
+    androidClientId: "1:710882524172:android:ce392852d7ae1b65ae4229",  // פרטי Client ID שמסופקים על ידי Firebase
+    expoClientId: "710882524172-khjkd7jj81k62a0jl18mb4jk0njfpfo1.apps.googleusercontent.com",  // זה ה-Expo Client ID
+    // responseType: Google.ResponseType.IdToken,
+    scopes: ['profile', 'email'],
+    });
 
-      if (!id_token) {
-        console.error("❌ No ID Token received!");
-        return;
-      }
+useEffect(() => {
+  if (response?.type === "success") {
+    const { id_token } = response.params || {};
 
-      const googleCredential = app.auth.GoogleAuthProvider.credential(id_token);
+    if (!id_token) {
+      console.error("❌ No ID Token received!");
+      return;
+    }
 
-      app.auth().signInWithCredential(googleCredential)
+    const googleCredential = firebase.auth.GoogleAuthProvider.credential(id_token);
+    firebase.auth().signInWithCredential(googleCredential)
+    
         .then(async (userCredential) => {
           const firebaseUser = userCredential.user;
 
@@ -81,29 +82,11 @@ const GoogleSignInButton = () => {
   }, [response]);
 
   return (
-    // <TouchableOpacity onPress={() => request && promptAsync()} style={{ flexDirection: "row", alignItems: "center", backgroundColor: "#DB4437", padding: 10, borderRadius: 5 }}>
-    //   <AntDesign name="google" size={24} color="white" />
-    //   <Text style={{ color: "white", marginLeft: 10 }}>Sign in with Google</Text>
-    // </TouchableOpacity>
-
-
-        <TouchableOpacity style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor:'rgb(209, 197, 208)', 
-          borderWidth: 1.5,
-          borderColor:"rgb(102, 23, 102)",
-          borderRadius: 16,
-          paddingVertical: 10,
-          marginTop: 20,}} 
+        <TouchableOpacity style={{flexDirection: "row", alignItems: "center", justifyContent: "center", backgroundColor:'rgb(209, 197, 208)', 
+          borderWidth: 1.5, borderColor:"rgb(102, 23, 102)", borderRadius: 16, paddingVertical: 10, marginTop: 20,}} 
           onPress={() => request && promptAsync()}>
           <Image source={require("../../assets/google-icon.png")} style={{width: 24, height: 24, marginRight: 10,}} />
-          <Text style={{
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "rgb(58, 8, 58)",
-  }}>התחבר עם Google</Text>
+          <Text style={{fontSize: 18, fontWeight: "bold", color: "rgb(58, 8, 58)",}}>התחבר עם Google</Text>
         </TouchableOpacity> 
   );
 };

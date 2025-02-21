@@ -81,8 +81,24 @@ const Header = () => {
 </View>
 </TouchableOpacity>
 
-      {/* כפתור של שלוש נקודות */}
-      <TouchableOpacity onPress={() => setModalVisible(true)} 
+     {/* כפתור של שלוש נקודות */}
+     <TouchableOpacity onPress={handleLogout} 
+      style={  {width: 40,
+        top: 0,
+  height: 40,
+  alignItems: "center",
+  backgroundColor: "rgba(150, 107, 135, 0.46)",
+  padding: 10,
+  borderRadius: 20,
+  justifyContent: "center",
+  marginTop: 15}}>
+    <View>
+    <MaterialCommunityIcons name="logout" size={23} color="#fff" />
+    </View>
+        {/* <Ionicons name="ellipsis-vertical" size={20} color="white" /> */}
+      </TouchableOpacity>
+      
+      {/* <TouchableOpacity onPress={() => setModalVisible(true)} 
       style={  {width: 40,
         top: 0,
   height: 40,
@@ -95,11 +111,10 @@ const Header = () => {
     <View>
     <Ionicons name="ellipsis-vertical" size={20} color="white" style={{ textShadowColor: 'rgba(0, 0, 0, 0.5)', textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 1 }} />
 </View>
-        {/* <Ionicons name="ellipsis-vertical" size={20} color="white" /> */}
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       {/* מודל של האפשרויות */}
-      <Modal
+      {/* <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
@@ -130,7 +145,7 @@ const Header = () => {
 
           </View>
         </View>
-      </Modal>
+      </Modal> */}
     </View>
   );
 };

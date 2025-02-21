@@ -1,20 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput,Image, Button, Alert, StyleSheet, TouchableOpacity, ImageBackground} from 'react-native';
+import { View, Text, TextInput,Image, Alert, StyleSheet, TouchableOpacity, ImageBackground} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
-// import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import {signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, AuthProvider,  signInWithCredential}
-   from 'firebase/auth';
-import {doc, getDoc, setDoc,
-  collection,
-  getDocs,
-  query,
-  where,
-  updateDoc,
-  QuerySnapshot
-} from 'firebase/firestore';
-import { auth, db } from '../../util/firebaseConfig';
+import {collection, getDocs, query, where,} from 'firebase/firestore';
+import { db } from '../../util/firebaseConfig';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import GoogleSignInButton from "./GoogleSignInButton";
 
@@ -61,79 +50,6 @@ const Login = () => {
   };
 
 
-  const handleSocialLogin = async () => {
-    // try {
-    //   const provider = new GoogleAuthProvider(); // יצירת ספק התחברות
-    //   const result = await signInWithPopup(auth, provider); // התחברות עם Popup
-    //   const user = result.user; // שליפת פרטי המשתמש
-  
-    //   // בדיקת האם המשתמש כבר קיים במערכת
-    //   const usersSnapshot = await getDocs(collection(db, 'users'));
-    //   const existingUserDoc = usersSnapshot.docs.find(
-    //     (doc) => doc.data().email === user.email
-    //   );
-  
-    //   if (existingUserDoc) {
-    //     const existingUser = existingUserDoc.data();
-    //     const familyUsername = existingUser.familyUsername;
-    //     const personalUsername = existingUserDoc.id;
-  
-    //     Alert.alert('המייל הזה כבר רשום במערכת, נכנסים לחשבונך...');
-    //     navigation.navigate('Family', { familyUsername, personalUsername });
-    //     return;
-    //   }
-  
-    //   const action = prompt('בחר אופציה:\n1 - להצטרף למשפחה קיימת\n2 - ליצור משפחה חדשה');
-  
-    //   if (action === '1') {
-    //     const familyUsername = prompt('הכנס שם משתמש של המשפחה:');
-    //     const password = prompt('הכנס סיסמה של המשפחה:');
-  
-    //     if (!familyUsername || !password) {
-    //       Alert.alert('יש להזין שם משתמש וסיסמה תקינים.');
-    //       return;
-    //     }
-  
-    //     const familyDoc = await getDoc(doc(db, 'families', familyUsername));
-    //     if (!familyDoc.exists()) {
-    //       Alert.alert('משפחה לא נמצאה.');
-    //       return;
-    //     }
-  
-    //     const familyData = familyDoc.data();
-    //     if (familyData.password !== password) {
-    //       Alert.alert('סיסמה שגויה.');
-    //       return;
-    //     }
-  
-    //     await updateDoc(doc(db, 'families', familyUsername), {
-    //       [`members.${user.uid}`]: user.displayName?.split(' ')[0] || '',
-    //     });
-  
-    //     await setDoc(doc(db, 'users', user.uid), {
-    //       firstName: user.displayName?.split(' ')[0] || '',
-    //       lastName: user.displayName?.split(' ')[1] || '',
-    //       email: user.email,
-    //       fromEmail: true,
-    //       familyUsername,
-    //       familyName: familyData.familyName,
-    //       gender: '',
-    //       birthDate: null,
-    //       personalUsername: user.uid,
-    //       joinDate: new Date().toISOString(),
-    //     });
-  
-    //     Alert.alert('הצטרפת בהצלחה למשפחה הקיימת!');
-    //     navigation.navigate('Family', { familyUsername, personalUsername: user.uid });
-    //   } else if (action === '2') {
-    //     // שלבים ליצירת משפחה חדשה
-    //   } else {
-    //     Alert.alert('בחירה לא תקינה');
-    //   }
-    // } catch (error) {
-    //   console.error('שגיאה בכניסה: ', error);
-    // }
-  };
 
   return (
     <ImageBackground source={require("../../assets/background2.jpg")} style={styles.background}>
@@ -173,10 +89,7 @@ const Login = () => {
           </TouchableOpacity>
         </View>
         <GoogleSignInButton />
-        {/* <TouchableOpacity style={styles.googleButton} onPress={handleSocialLogin}>
-          <Image source={require("../../assets/google-icon.png")} style={styles.googleIcon} />
-          <Text style={styles.googleButtonText}>התחבר עם Google</Text>
-        </TouchableOpacity> */}
+
       </View>
 
       <Image source={require("../../assets/1.png")} style={styles.familyIcon} />
@@ -254,27 +167,27 @@ const styles = StyleSheet.create({
     fontSize: 18, 
     marginLeft: 8,
   },
-  googleButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor:'rgb(209, 197, 208)', 
-    borderWidth: 1.5,
-    borderColor:"rgb(102, 23, 102)",
-    borderRadius: 16,
-    paddingVertical: 10,
-    marginTop: 20,
-  },
-  googleIcon: {
-    width: 24,
-    height: 24,
-    marginRight: 10,
-  },
-  googleButtonText: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "rgb(58, 8, 58)",
-  },
+  // googleButton: {
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  //   backgroundColor:'rgb(209, 197, 208)', 
+  //   borderWidth: 1.5,
+  //   borderColor:"rgb(102, 23, 102)",
+  //   borderRadius: 16,
+  //   paddingVertical: 10,
+  //   marginTop: 20,
+  // },
+  // googleIcon: {
+  //   width: 24,
+  //   height: 24,
+  //   marginRight: 10,
+  // },
+  // googleButtonText: {
+  //   fontSize: 18,
+  //   fontWeight: "bold",
+  //   color: "rgb(58, 8, 58)",
+  // },
   familyIcon: { 
     width: 110, 
     height: 120, 

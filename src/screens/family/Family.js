@@ -18,6 +18,7 @@ const Family = () => {
   const [children, setChildren] = useState({});
   const navigation = useNavigation(); // השתמשנו ב-hook של ניווט ב-RN
 
+  console.log(familyUsername, personalUsername)
   useFocusEffect(
     useCallback(() => {
     const fetchFamilyData = async () => {

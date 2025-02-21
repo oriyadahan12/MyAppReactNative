@@ -10,8 +10,6 @@ export type RootStackParamList = {
   DoctorVisits: {childId: string};
   Vacinations: {childId: string};
   DropOfMilk: {childId: string};
-
-  // הוסיפי מסכים נוספים כאן
 };
 
 declare global {

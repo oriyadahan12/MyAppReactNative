@@ -5,7 +5,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db, auth } from '../../util/firebaseConfig';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { signOut } from 'firebase/auth';
-import { User, LogOut, Baby, Stethoscope, Syringe, Ruler, Edit } from 'lucide-react-native';
+// import { User, LogOut, Baby, Stethoscope, Syringe, Ruler, Edit } from 'lucide-react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -100,7 +100,7 @@ useFocusEffect(
               <Image source={{ uri: childData.photoUrl }} style={styles.image} onError={() => setImageError(true)} />
             ) : (
               <View style={styles.placeholder}>
-                <User size={40} color="#ccc" />
+                {/* <User size={40} color="#ccc" /> */}
               </View>
             )}
             <Text style={styles.name}>{childData.name}</Text>

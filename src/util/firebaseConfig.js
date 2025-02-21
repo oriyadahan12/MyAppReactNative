@@ -10,7 +10,9 @@ const firebaseConfig = {
     projectId: "userautoapp",
     storageBucket: "userautoapp.firebasestorage.app",
     messagingSenderId: "710882524172",
-    appId: "1:710882524172:web:6d4e6a3c6b678a90ae4229",
+    // appId: "1:710882524172:web:6d4e6a3c6b678a90ae4229",
+    appId: "1:710882524172:android:ce392852d7ae1b65ae4229"
+
 };
 
 // אתחול הפיירבייס

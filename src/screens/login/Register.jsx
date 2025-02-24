@@ -82,13 +82,28 @@ const Register = () => {
           Alert.alert('שגיאה', 'שם משתמש משפחתי לא קיים או שסיסמת המשפחה שגויה.');
           return;
         }
+        const creatorId = familyDoc.data().creatorId;
+        if (creatorId) {
+          const notificationRef = doc(db, 'notifications', creatorId);
+          await setDoc(notificationRef, {
+            message: `משתמש חדש ${personalUsername} הצטרף למשפחה.`,
+            timestamp: Timestamp.fromDate(new Date())
+          }, { merge: true });
+        }
       } else {
         const familyDoc = await getDoc(familyRef);
         if (familyDoc.exists()) {
           Alert.alert('שגיאה', 'שם משתמש משפחתי כבר תפוס.');
           return;
         }
-        await setDoc(familyRef, { familyUsername, password, familyName, children: {} });
+        // await setDoc(familyRef, { familyUsername, password, familyName, children: {} });
+        await setDoc(familyRef, { 
+          familyUsername, 
+          password, 
+          familyName, 
+          creatorId: personalUsername, // נשמור מי יצר את המשפחה
+          children: {} 
+        });
       }
 
       await setDoc(doc(db, 'users', personalUsername), {

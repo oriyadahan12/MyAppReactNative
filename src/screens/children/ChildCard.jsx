@@ -4,14 +4,13 @@ import { View, Text, Image, TouchableOpacity, ActivityIndicator, Alert, StyleShe
 import { doc, getDoc } from 'firebase/firestore';
 import { db, auth } from '../../util/firebaseConfig';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { signOut } from 'firebase/auth';
-// import { User, LogOut, Baby, Stethoscope, Syringe, Ruler, Edit } from 'lucide-react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icon2 from 'react-native-vector-icons/Ionicons';
 import Header from '../../components/header'; // ייבוא הקומפוננטה של הסרגל
 import { Timestamp } from 'firebase/firestore';
+import styles from '../../components/styles';
 
 export const calculateAge = (birthTimestamp) => {
   const birthDate = birthTimestamp.toDate();
@@ -127,83 +126,83 @@ useFocusEffect(
   
 };
 
-const styles = StyleSheet.create({
-  background: { 
-    flex: 1, 
-    resizeMode: "cover", 
-    width: "100%", 
-    height: "100%", 
-},
-  container: { 
-    padding: 16, 
-    backgroundColor: "rgba(253, 251, 253, 0.5)", 
-    flex: 1, 
-    borderRadius: 20, 
-    margin: 10 
-  },
-  card: {
-    alignItems: "center",
-    padding: 20,
-    backgroundColor: "white",
-    borderRadius: 10,
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    width: "100%",
-  },
-  image: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-  },
-  placeholder: {
-    width: 120,
-    height: 120,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f3f4f6",
-    borderRadius: 60,
-  },
-  name: {
-    fontSize: 22,
-    fontWeight: "bold",
-    marginVertical: 10,
-    color: "rgba(134, 26, 7, 0.81)"
-  },
+// const styles = StyleSheet.create({
+//   background: { 
+//     flex: 1, 
+//     resizeMode: "cover", 
+//     width: "100%", 
+//     height: "100%", 
+// },
+//   container: { 
+//     padding: 16, 
+//     backgroundColor: "rgba(253, 251, 253, 0.5)", 
+//     flex: 1, 
+//     borderRadius: 20, 
+//     margin: 10 
+//   },
+//   card: {
+//     alignItems: "center",
+//     padding: 20,
+//     backgroundColor: "white",
+//     borderRadius: 10,
+//     shadowColor: "#000",
+//     shadowOpacity: 0.1,
+//     shadowRadius: 10,
+//     width: "100%",
+//   },
+//   image: {
+//     width: 120,
+//     height: 120,
+//     borderRadius: 60,
+//   },
+//   placeholder: {
+//     width: 120,
+//     height: 120,
+//     justifyContent: "center",
+//     alignItems: "center",
+//     backgroundColor: "#f3f4f6",
+//     borderRadius: 60,
+//   },
+//   name: {
+//     fontSize: 22,
+//     fontWeight: "bold",
+//     marginVertical: 10,
+//     color: "rgba(134, 26, 7, 0.81)"
+//   },
 
-  cardText:{
-    fontSize: 16,
-    fontWeight: "bold",
-    marginVertical: 2,
-    color: "rgb(102, 23, 102)"
-  },
-  // כפתורים מסביב לכרטיס
-  buttonContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    marginTop: 20,
-    width: "100%",
-  },
-  roundButton: {
-    width: 90,
-    height: 90,
-    borderRadius: 50,
-    backgroundColor:'rgb(175, 138, 175)', 
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 10,
-    shadowColor: "#000",
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 5,
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 13,
-    marginTop: 5,
-    textAlign: "center",
-  },
-});
+//   cardText:{
+//     fontSize: 16,
+//     fontWeight: "bold",
+//     marginVertical: 2,
+//     color: "rgb(102, 23, 102)"
+//   },
+//   // כפתורים מסביב לכרטיס
+//   buttonContainer: {
+//     flexDirection: "row",
+//     flexWrap: "wrap",
+//     justifyContent: "center",
+//     marginTop: 20,
+//     width: "100%",
+//   },
+//   roundButton: {
+//     width: 90,
+//     height: 90,
+//     borderRadius: 50,
+//     backgroundColor:'rgb(175, 138, 175)', 
+//     alignItems: "center",
+//     justifyContent: "center",
+//     margin: 10,
+//     shadowColor: "#000",
+//     shadowOpacity: 0.2,
+//     shadowRadius: 5,
+//     elevation: 5,
+//   },
+//   buttonText: {
+//     color: "#fff",
+//     fontSize: 13,
+//     marginTop: 5,
+//     textAlign: "center",
+//   },
+// });
 
 export default ChildCard;

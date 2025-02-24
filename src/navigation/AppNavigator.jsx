@@ -72,15 +72,15 @@ const AppNavigator = () => {
           )}
         </Stack.Screen>
         <Stack.Screen name="MileStones">
-          {() => (
-            <ScreenWrapper>
-              <MileStones />
-            </ScreenWrapper>
-          )}
+        {() => (
+          <ScreenWrapper useScrollView={false}>
+            <MileStones />
+          </ScreenWrapper>
+        )}
         </Stack.Screen>
         <Stack.Screen name="DoctorVisits">
           {() => (
-            <ScreenWrapper>
+          <ScreenWrapper useScrollView={false}>
               <DoctorVisits />
             </ScreenWrapper>
           )}

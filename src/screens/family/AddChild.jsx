@@ -124,6 +124,14 @@ const AddChild = () => {
           { "name": "הצעד הראשון שלי", "date": null, "comments": "" },
           { "name": "נגמלתי מטיטולים", "date": null, "comments": "" },
           ],
+          "doctorVisits": [
+            { "id": 0, "name": "ביקור ראשון אצל הרופא המטפל", "age": "עד גיל שבועיים", "date": null, "doctorName": "", "doctorType": "רופא ילדים", "location": "", "diagnosis": "", "referrals": "", "medications": "", "comments": "" },
+            { "id": 1, "name": "בדיקת החזר אור", "age": "חודש וחצי", "date": null, "doctorName": "", "doctorType": "רופא עיניים", "location": "", "diagnosis": "", "referrals": "", "medications": "", "comments": "" },
+            { "id": 2, "name": "אולטראסאונד פרקי ירכיים", "age": "חודשיים", "date": null, "doctorName": "", "doctorType": "אורתופד", "location": "", "diagnosis":"", "referrals": "", "medications": "", "comments": "" },
+            { "id": 3, "name": "בדיקת התפתחות", "age": "3 חודשים", "date": null, "doctorName": "", "doctorType": "רופא ילדים", "location": "", "diagnosis": "", "referrals": "", "medications": "", "comments": "ניתן לעשות גם אצל הרופא בטיפת חלב" },
+            { "id": 4, "name": "בדיקת התפתחות", "age": "9 חודשים", "date": null, "doctorName": "", "doctorType": "רופא ילדים", "location": "", "diagnosis": "", "referrals": "", "medications": "", "comments": "" },
+            { "id": 5, "name": "בדיקת התפתחות", "age": "שנה וחצי", "date": null, "doctorName": "", "doctorType": "רופא ילדים", "location": "", "diagnosis": "","referrals": "", "medications": "", "comments": "" },
+          ],
 "vacinations": [
     {
       "name": "חיסון פוליו",

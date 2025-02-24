@@ -167,27 +167,6 @@ const styles = StyleSheet.create({
     fontSize: 18, 
     marginLeft: 8,
   },
-  // googleButton: {
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  //   backgroundColor:'rgb(209, 197, 208)', 
-  //   borderWidth: 1.5,
-  //   borderColor:"rgb(102, 23, 102)",
-  //   borderRadius: 16,
-  //   paddingVertical: 10,
-  //   marginTop: 20,
-  // },
-  // googleIcon: {
-  //   width: 24,
-  //   height: 24,
-  //   marginRight: 10,
-  // },
-  // googleButtonText: {
-  //   fontSize: 18,
-  //   fontWeight: "bold",
-  //   color: "rgb(58, 8, 58)",
-  // },
   familyIcon: { 
     width: 110, 
     height: 120, 

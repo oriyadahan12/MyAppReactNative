@@ -1,6 +1,7 @@
 import { supabase } from '../util/supabaseClient';
 import * as ImagePicker from 'expo-image-picker';
 import { Alert, Platform } from 'react-native';
+import * as FileSystem from "expo-file-system";
 
 export interface PhotoFile {
   name?: string;
@@ -100,7 +101,7 @@ export const pickImage = async (useCamera = false, profile=false) => {
       throw error; // השלכת השגיאה כדי שניתן יהיה לטפל בה במקום אחר
     }
   };
-
+  
 export const deleteImage = async (imageUrl: string): Promise<boolean> => {
   console.log("Deleting file from path:");
 
